@@ -5,3 +5,4 @@ class Solution {
        return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
    }
 }
+//ALWALYS WHEN U GET A CASE O ACMPARING NODES JUST THINK OF FALSE CASES WHERE IT FAILS IN THIS CASE WHEN ONE OF THEN IS FALSE IT IS FALSE AND WHEN VALUES ARE NOT EQUAL FALSE
