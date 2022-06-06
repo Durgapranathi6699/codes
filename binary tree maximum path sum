@@ -1,0 +1,26 @@
+class Solution {
+    int max=Integer.MIN_VALUE;
+    public int maxPathSum(TreeNode root) {
+        postorder(root);
+        return max;
+    }
+    int postorder(TreeNode root){
+        if(root==null)return 0;
+        //traverse left subtree then right
+        int left=Math.max(postorder(root.left),0);//to avoid taking negatives
+        int right=Math.max(postorder(root.right),0);
+        max=Math.max(max,left+right+root.val);//max path sum//THIS IS OUR ANSWER
+        return Math.max(left,right)+root.val;//returning path sum//HELPER FOR RETURNING LEFT AND RIGHT
+        
+        //left value again calls recursivly (gets value as again max(left ,right),val)
+        /* now if we take ex;1  left most node is 2  math.max(left,right of 2)+root.val(2)==0+2=2 it is a return path ,max value till now is root.left+root.right+root.val=0+0+2=2   
+        2 returns the path 2 to 1  now node 3 aslo follows same as above for node 1 math.max(2,3)+root.val=3+1=4 it is a returning sum and max sum is 2+3+1=6 */
+        /*ex:2  left most 9 return sum max(0,0)+9=0+9=9  max=0+0+9-->9 
+             next right subtree  left most is 15 return sum max(0,0)+15=15 max=0+0+15=15
+              right node is 7 return sum max(0,0)+7=7 max=0+0+7=7
+              now root node 20 return sum (15,7)+20=15+20=35 max=15+7+20=42
+              now node -10 return sum=max(9,20)+ -10=20-10=10
+              max=9+20+-10=19 */
+        //NOTE in left value we are bounding with 0 beacue ehen return sum is getting -ve then make it 0//
+    }
+}
