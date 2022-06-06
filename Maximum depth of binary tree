@@ -1,0 +1,12 @@
+class Solution {
+    public int maxDepth(TreeNode root) {
+      return dfs(root);
+    }
+    int dfs(TreeNode root){
+        if(root==null)return 0;
+        int left=dfs(root.left);
+        int right=dfs(root.right);
+        return Math.max(left,right)+1;
+    }
+}
+//FOR ALL THE DEPTH /LENGTH PATH PROBLEMS WE ARE FOLLOWING SAME PROCEDURE AS LEFT RECURSIVE  RIGHT RECURSIVE RETURN MAX OF THIS TWO VALUES +1
