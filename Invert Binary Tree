@@ -1,0 +1,19 @@
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+     Queue<TreeNode> q=new LinkedList<>();
+        q.offer(root);
+        if(root==null)return root;
+        while(!q.isEmpty()){
+            int n=q.size();
+            for(int i=0;i<n;i++){
+                TreeNode t=q.remove();
+              TreeNode temp=t.left;
+                t.left=t.right;
+                t.right=temp;
+                if(t.left!=null)q.offer(t.left);
+                if(t.right!=null)q.offer(t.right);
+             }
+        }
+        return root;
+    }
+}
