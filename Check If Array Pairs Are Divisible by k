@@ -1,0 +1,47 @@
+class Solution {
+    public boolean canArrange(int[] arr, int k) {
+       HashMap<Integer,Integer> map=new HashMap<>();//rem,frquency
+       for(int num:arr){
+           int r=num%k;
+           if(r<0)r=r+k;
+          int freq=map.getOrDefault(r,0);//if map contains frq of r then returns r else 0
+           map.put(r,freq+1);
+       }
+      for(int r:map.keySet()){//under 3 conditions this fails when remainder is zero its frequency should be even then only they can pair 2.case is when remainder=k/2 frequency of remainder should be even 3.case freq of remainder and k-reaminder should be same then they can foem a pair
+           if(r==0){
+             if(map.get(r)%2!=0)return false;
+           }
+          else if(r*2==k){
+              if(map.get(r)%2!=0) return false;
+          }
+          else{
+              int f1=map.get(r);
+              int f2=map.getOrDefault(k-r,0);
+              if(f1!=f2)return false;
+          }
+      }
+          return true;
+    }
+}
+//COUNTING NO.OF PAIRS 
+class Solution
+{
+    public static long countKdivPairs(int arr[], int n, int k)
+    {
+        long ans=0;
+       HashMap<Integer,Integer> map=new HashMap<>();//rem,frquency
+       for(int num:arr){
+           int r=num%k;
+           if(map.containsKey((k-r)%k)){
+               ans=ans+map.get((k-r)%k);
+           }
+           if(map.containsKey(r)){
+               map.put(r,map.get(r)+1);
+           }else{
+               map.put(r,1);
+           }
+       }
+       return ans;
+    }
+}
+
