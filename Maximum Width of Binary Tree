@@ -1,0 +1,35 @@
+class pair{
+    TreeNode node;
+    int num;
+    pair(TreeNode node1,int num1){
+        node=node1;
+        num=num1;
+    }
+}
+class Solution{
+ public int widthOfBinaryTree(TreeNode root){
+    if(root==null)return 0;int ans=0;
+    Queue<pair> q=new LinkedList<>();
+    q.offer(new pair(root,0));
+   
+    while(!q.isEmpty()){
+         int last=0,first=0;
+        int min=q.peek().num;
+        int n=q.size();
+        for(int i=0;i<n;i++){
+          int j=q.peek().num-min;
+              TreeNode t=q.remove().node;
+            if(i==0)first=j;
+            if(i==(n-1))last=j;
+        if(t.left!=null){
+            q.offer(new pair(t.left,2*j+1));//left node
+        }
+        if(t.right!=null){
+            q.offer(new pair(t.right,2*j+2));//right node
+           }
+        }
+        ans=Math.max(ans,last-first+1);
+    }
+    return ans;
+}
+}
