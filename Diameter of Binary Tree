@@ -1,14 +1,15 @@
 class Solution {
-    int max=Integer.MIN_VALUE;
+    int ans=Integer.MIN_VALUE;
     public int diameterOfBinaryTree(TreeNode root) {
-        postorder(root);
-        return max;
+        depthOFleftRight(root);
+        return ans;
     }
-    int postorder(TreeNode root){
+    int depthOFleftRight(TreeNode root){
         if(root==null)return 0;
-        int left=postorder(root.left);
-        int right=postorder(root.right);
-        max=Math.max(max,left+right);
-        return Math.max(left,right)+1;
+        int Dleft=depthOFleftRight(root.left);//depth of left
+        int Dright=depthOFleftRight(root.right);//depth of right
+        ans=Math.max(max,Dleft+Dright);//final answer is the depth of right+left
+        return Math.max(Dleft,Dright)+1;//depth is given by this
     }
 }
+//THIS IS SAME AS MAX PATH SUM
