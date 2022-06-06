@@ -1,0 +1,16 @@
+class Solution { 
+     TreeNode pre=null;
+    
+    public void flatten(TreeNode root) {
+       if(root==null)return ;
+        //here we are attcahing nodes from right end to left start
+        flatten(root.right);
+        flatten(root.left);
+        root.right=pre;//1 st its done for extreme right node
+        root.left=null;
+        pre=root;//that right node is set as pre
+     
+        /* here we  start from node 6 it doesnt have left and right so set it as pre and return to 5 it has right as 6 ,left as null so now root.right=pre(6) right node of 5 is 6 and left is null(root.left=null) now return to 1 ,1 has complmented traversing in right as we strted with right now it goes to left( again in left subpart it follows right left) it goes to right most node i.e is 4 here root.right of 4 =pre(cur pre is 5) thats how 4's right is 5 again it return now it is at node 2 ,node 2 completed its right it goes to left now root.right of 3=pre(4)
+        now for node 2 left,right done root.right of 2=pre(3) and it return to 1 which has completed right and left so root.right of 1=pre(2) root.right=null and we are done*/
+    }
+}
