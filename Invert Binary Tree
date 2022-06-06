@@ -17,3 +17,4 @@ class Solution {
         return root;
     }
 }
+//BY FOLLOWING LEVEL ORDER TRAVERSAL USING QUEUE JUST SWAP LEFT AND RIGHT NODES
