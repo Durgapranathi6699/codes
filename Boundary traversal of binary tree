@@ -1,0 +1,39 @@
+class Solution
+{
+ArrayList <Integer> boundary(Node node)
+	{
+	ArrayList <Integer> ans=new ArrayList <Integer>();
+	    	if(isLeaf(node)==false)ans.add(node.data);
+	    	addLeft(node,ans);
+	    	addLeaves(node,ans);
+	    	addRight(node,ans);
+	    	return ans;
+	}
+	static boolean isLeaf(Node root){//CHECK FOR LEAF NODES
+	    return root.left==null && root.right==null;
+	}
+	static void addLeft(Node root,ArrayList <Integer> res){//ADDING LEFT NODES//GO LEFT LEFT LEFT IF NO LEFT THEN RIGHT
+	    Node cur=root.left;
+	    while(cur!=null){
+	        if(isLeaf(cur)==false)res.add(cur.data);
+	        if(cur.left!=null)cur=cur.left;
+	        else cur=cur.right; }	}
+	static void addRight(Node root,ArrayList <Integer> res){//ADDING RIGHT NODES IN REVESE WAY//WE GO RIGHT RIGHT RIGHT IF NO RIGHT THEN GO TO LEFT
+	    Node cur=root.right;
+	    ArrayList <Integer> temp=new ArrayList <Integer>();
+	    while(cur!=null){
+	        if(isLeaf(cur)==false)temp.add(cur.data);
+	        if(cur.right!=null)cur=cur.right;
+	        else cur=cur.left;}
+	    for(int i=temp.size()-1;i>=0;i--){
+	        res.add(temp.get(i));
+	    }
+	}
+	static void addLeaves(Node root,ArrayList <Integer> res){//IF IT IS A LEAF ADD IT THEN GO TO LEFT RIGHT SUBTREES AND CHECK
+	    if(isLeaf(root)){
+	    res.add(root.data);
+	    return;}
+	    if(root.left!=null)addLeaves(root.left,res);
+	    if(root.right!=null)addLeaves(root.right,res);
+	}
+}
