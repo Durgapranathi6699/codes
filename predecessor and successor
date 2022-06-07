@@ -1,0 +1,25 @@
+class GfG
+{
+    public static void findPreSuc(Node root, Res p, Res s, int key)
+    {
+        Node temp=root;
+        while(temp!=null){
+            if(temp.data>key){
+                s.succ=temp;
+                temp=temp.left;//for predecessor
+            }else{
+                temp=temp.right;//if not above case suc will be in right subtree
+            }
+        }
+        temp=root;
+        while(temp!=null){
+            if(temp.data<key){
+                p.pre=temp;
+                temp=temp.right;//for succsessor
+            }else{
+                //predocer will be in left
+                temp=temp.left;
+            }
+        }
+        
+        }
