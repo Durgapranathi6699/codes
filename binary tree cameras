@@ -1,0 +1,24 @@
+class Solution {
+    int notcovered=0;
+    int covered=1;
+    int hascam=2;
+    int no_of_cam=0;
+   
+    public int minCameraCover(TreeNode root) {
+      return dfs(root)==notcovered?no_of_cam+1:no_of_cam;
+     }
+    int dfs(TreeNode root){
+        if(root==null)return covered;
+        //at leaf dont put the cam beacuse no.of cams become more,so 
+        //make it convered rather than puuting cams
+        int left=dfs(root.left);
+        int right=dfs(root.right);
+        if(left==notcovered || right==notcovered){
+            no_of_cam++;
+            return hascam;
+        }
+      else  if(left==hascam || right==hascam)return covered;
+        else return notcovered;
+        
+    }
+    }
