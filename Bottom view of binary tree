@@ -1,0 +1,33 @@
+class Pair{
+    Node node; int line;
+    Pair(Node n,int l){
+        node=n; line=l;}}
+class Solution
+{
+    public ArrayList <Integer> bottomView(Node root)
+    {
+    ArrayList<Integer> ans=new ArrayList<Integer>();
+        if(root==null)return ans;
+        Queue<Pair> q=new LinkedList<>();//Pair has root , line
+        Map<Integer,Integer> map=new TreeMap<>();//line ,root data
+        q.offer(new Pair(root,0)); //traval in a queue store things in map which does not repeat with same value
+        while(!q.isEmpty()){
+            int n=q.size();
+            for(int i=0;i<n;i++){
+                Pair p=q.remove();
+                Node t=p.node;
+                int li=p.line;
+               map.put(li,t.data);
+                if(t.left!=null){
+                q.offer(new Pair(t.left,li-1));
+                    
+                }
+            if(t.right!=null){
+      q.offer(new Pair(t.right,li+1));  }
+      } }
+        for(Map.Entry<Integer,Integer> i:map.entrySet()){//now we stored things in map get then
+            ans.add(i.getValue());  }
+        return ans;
+    }
+}
+  NOTE:SAME AS TOP VIEW EXCEPT THE CONDITION IT WILL BE REPLACE IF NODES IN SAME LINES ARE THERE
