@@ -1,0 +1,19 @@
+class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+      List<List<Integer>> ans=new ArrayList<>();
+       List<Integer> l=new ArrayList<>();
+        helper(root,targetSum,ans,l,0);
+        return ans;
+    }
+    void helper(TreeNode root, int targetSum,List<List<Integer>> ans, List<Integer> l,int sum){
+        if(root==null)return;
+        l.add(root.val);
+        if(sum+root.val==targetSum && root.left==null && root.right==null){//nodes from root to leaf
+            ans.add(new ArrayList<>(l));
+        }
+        helper(root.left, targetSum,ans,l,sum+root.val);
+         helper(root.right, targetSum,ans,l,sum+root.val);
+        l.remove(l.size()-1);//if our path giving required ans remove last and check for other posibility
+        
+    }
+}
