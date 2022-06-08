@@ -1,0 +1,42 @@
+class Pair{  //in queue we store node,line
+    Node node;
+    int line;
+    Pair(Node n,int l){
+        node=n;
+        line=l; 
+        
+    }
+}
+class Solution
+{
+    static ArrayList<Integer> topView(Node root)
+    {
+       ArrayList<Integer> ans=new ArrayList<Integer>();
+        if(root==null)return ans;
+       Queue<Pair> q=new LinkedList<>();//pair  root,line
+       Map<Integer,Integer> map=new TreeMap<>();//line , root 
+       q.offer(new Pair(root,0));
+       while(!q.isEmpty()){//LEVEL ORDER TRAVERSAL
+           int n=q.size();
+           for(int i=0;i<n;i++){
+               Pair p=q.remove();
+           Node t=p.node;
+           int li=p.line;
+           if(map.get(li)==null)map.put(li,t.data);
+           if(t.left!=null){
+               q.offer(new Pair(t.left,li-1));
+           }
+           if(t.right!=null){
+               q.offer(new Pair(t.right,li+1));
+           }
+       }
+       }
+       for(Map.Entry<Integer,Integer> entry:map.entrySet()){
+           ans.add(entry.getValue());
+       }
+       return ans;
+    }
+}
+
+
+
